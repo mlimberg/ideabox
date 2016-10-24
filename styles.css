@@ -32,15 +32,18 @@ div{
   display: inline-block;
 }
 
-.input-section input, .input-section button{
+.input-section input, .input-section button, .input-section textarea, .idea-section input{
   display: block;
   width: 90%;
   margin: auto;
   border: 1px solid #939958;
-
 }
 
-#title-input, #save-button{
+textarea{
+  resize: none;
+}
+
+#title-input, #save-button, #search-input{
   height: 40px;
   margin-bottom: 20px;
 }
@@ -50,12 +53,31 @@ div{
   margin-bottom: 20px;
 }
 
-#body-input::placeholder{
-  color: white;
+::-webkit-input-placeholder{
+  font-size: 20px;
+  padding-left: 5px;
 }
 
 #save-button{
   font-size: 20px;
   color: white;
   background-color: #00a79d;
+  width: 91%;
+}
+
+#save-button:hover{
+  background-color: #045e55;
+}
+
+#search-input{
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 900px) {
+  .input-section input, .input-section button, .input-section textarea, .idea-section input{
+    width: 814px;
+  }
+  #save-button{
+    width: 820px;
+  }
 }
