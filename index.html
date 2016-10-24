@@ -12,16 +12,19 @@
 
     <section class="input-section">
       <div><h1>idea</h1><h1 id="box-text">box</h1></div>
-      <input id="title-input" type="text" name="title" value="" placeholder="Title" class="idea-inputs">
-      <textarea id="body-input" type="text" name="body" value="" placeholder="Body" rows="5" class="idea-inputs"></textarea>
-      <button id="save-button" type="button" name="save">save</button>
+
+      <input id="title-input" type="text" name="title" placeholder="Title">
+      <textarea id="body-input" type="text" name="body" placeholder="Body" rows="5"></textarea>
+      <button id="save-button" type="button" name="save" disabled="true">save</button>
     </section>
 
     <section class="idea-section">
       <input id="search-input" type="text" name="search" value="" placeholder="Search">
       <section class="idea-list"></section>
     </section>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
+    <script src="ideabox.js" charset="utf-8"></script>
   </body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="ideabox.js"></script>

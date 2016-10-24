@@ -1,3 +1,16 @@
+
+$('#title-input').on('input', function(){
+  if($('#title-input').val() && $('#body-input').val()){
+    $('#save-button').prop('disabled', false);
+  }
+});
+
+$('#body-input').on('input', function(){
+  if($('#title-input').val() && $('#body-input').val()){
+    $('#save-button').prop('disabled', false);
+  }
+});
+
 var ideaList = $('.idea-list');
 var ideaTitle = $('.idea-title');
 var ideaBody = $('.idea-body');
@@ -14,6 +27,7 @@ function NewIdeaConstructor(titleText, bodyText) {
 function clearInputFields() {
   return titleField.val("") && bodyField.val("");
 }
+
 
 function addNewIdeaBox(titleText, bodyText) {
   var currentIdea = new NewIdeaConstructor();
