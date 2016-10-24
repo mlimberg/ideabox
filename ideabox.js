@@ -31,13 +31,13 @@ function clearInputFields() {
 
 function addNewIdeaBox(titleText, bodyText) {
   var currentIdea = new NewIdeaConstructor();
-  var titleText = currentIdea['titleText'];
-  var bodyText = currentIdea['bodyText'];
+  var title = currentIdea.titleText;
+  var body = currentIdea.bodyText;
   var newIdea = $(
     `<article class="idea-box">
-      <h1 class="idea-title">${titleText}</h1>
+      <h1 class="idea-title">${title}</h1>
       <img class="delete-idea" />
-      <p class="idea-body">${bodyText}</p>
+      <p class="idea-body">${body}</p>
       <div class="idea-quality">Swillobv</div>`
       );
 ideaList.prepend(newIdea);
