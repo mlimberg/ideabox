@@ -31,19 +31,21 @@ function clearInputFields() {
 
 function addNewIdeaBox(titleText, bodyText) {
   var currentIdea = new NewIdeaConstructor();
-  var titleText = currentIdea['titleText'];
-  var bodyText = currentIdea['bodyText'];
-  var newIdea = $(
+  var title = currentIdea.titleText;
+  var body = currentIdea.bodyText;
+  ideaList.prepend(
     `<article class="idea-box">
-      <h1 class="idea-title">${titleText}</h1>
+      <h2 class="idea-title">${title}</h2>
       <img class="delete-idea" />
-      <p class="idea-body">${bodyText}</p>
-      <div class="idea-quality">Swillobv</div>`
+      <p class="idea-body">${body}</p>
+      <div class="idea-ranking">Swill</div>
+
+    </article>`
+
       );
-ideaList.prepend(newIdea);
+// ideaList.prepend(newIdea);
 }
 
 saveButton.on('click', function() {
   addNewIdeaBox();
-  clearInputFields();
 });
