@@ -36,7 +36,7 @@ function addNewIdeaBox(titleText, bodyText) {
   var body = currentIdea.bodyText;
   ideaList.prepend(
     `<article class="idea-box">
-      <div class="idea-box-title">
+      <div class="idea-box-header">
         <h2 class="idea-title" contentEditable="true">${title}</h2>
         <img src="images/delete.svg" class="delete-idea" />
       </div>
@@ -44,12 +44,8 @@ function addNewIdeaBox(titleText, bodyText) {
       <div class="idea-box-footer">
         <img src="images/upvote.svg">
         <img src="images/downvote.svg">
-        <div class="idea-ranking-quality">
-          quality:
-        </div>
-        <div class="idea-ranking">
-          Swill
-        </div>
+        <div class="idea-ranking-quality">quality:</div>
+        <div class="idea-ranking">Swill</div>
       </div>
     </article>`);
 }
