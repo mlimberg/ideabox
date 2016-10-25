@@ -5,6 +5,16 @@ var saveButton = $('#save-button');
 var titleField = $('#title-input');
 var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
+var count = 0;
+var storageArray = [];
+
+saveButton.on('click', function() {
+  count++;
+  addNewIdeaBox();
+  clearInputFields();
+  disableSaveButton();
+  stringifyAndStore();
+});
 
 
 $(ideaFields).on('input', function(){
@@ -30,6 +40,8 @@ ideaFields.keypress(function(event){
 function NewIdeaConstructor(titleText, bodyText) {
   this.titleText = titleField.val();
   this.bodyText = bodyField.val();
+  this.quality = "swill";
+  this.idcount = count;
 }
 
 function clearInputFields() {
@@ -39,9 +51,10 @@ function clearInputFields() {
 function disableSaveButton() {
   saveButton.prop('disabled', true);
 }
+var currentIdea;
 
 function addNewIdeaBox(titleText, bodyText) {
-  var currentIdea = new NewIdeaConstructor();
+  currentIdea = new NewIdeaConstructor();
   var title = currentIdea.titleText;
   var body = currentIdea.bodyText;
   ideaList.prepend(
@@ -63,17 +76,16 @@ function addNewIdeaBox(titleText, bodyText) {
       $(this).parent().parent().remove();
     });
 
-    $('upvote-img').on('click', function(){
-      $(this).parent().parent().
-    })
-
-    $('downvote-img').on('click', function(){
-      $(this).parent().parent().
-    })
+    // $('upvote-img').on('click', function(){
+    //   $(this).parent().parent().
+    // })
+    //
+    // $('downvote-img').on('click', function(){
+    //   $(this).parent().parent().
+    // })
 }
 
-saveButton.on('click', function() {
-  addNewIdeaBox();
-  clearInputFields();
-  disableSaveButton();
-});
+function stringifyAndStore(){
+  storageArray.push(currentIdea);
+  console.log(storageArray);
+}
