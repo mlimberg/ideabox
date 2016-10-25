@@ -60,6 +60,7 @@ saveButton.on('click', function() {
   disableSaveButton();
 });
 
-$('.delete-idea').on('click', function(){
-  $(this).parent().remove();
+$('.idea-list').on('click', $('.delete-idea'), function(){
+  console.log($(this));
+  $(this).children().remove();
 });
