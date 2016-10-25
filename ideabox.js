@@ -1,3 +1,9 @@
+var ideaList = $('.idea-list');
+var ideaTitle = $('.idea-title');
+var ideaBody = $('.idea-body');
+var saveButton = $('#save-button');
+var titleField = $('#title-input');
+var bodyField = $('#body-input');
 
 $('#title-input').on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
@@ -11,12 +17,6 @@ $('#body-input').on('input', function(){
   }
 });
 
-var ideaList = $('.idea-list');
-var ideaTitle = $('.idea-title');
-var ideaBody = $('.idea-body');
-var saveButton = $('#save-button');
-var titleField = $('#title-input');
-var bodyField = $('#body-input');
 
 
 function NewIdeaConstructor(titleText, bodyText) {
@@ -28,22 +28,25 @@ function clearInputFields() {
   return titleField.val("") && bodyField.val("");
 }
 
+function disableSaveButton() {
+  saveButton.prop('disabled', true);
+}
 
 function addNewIdeaBox(titleText, bodyText) {
   var currentIdea = new NewIdeaConstructor();
   var title = currentIdea.titleText;
   var body = currentIdea.bodyText;
-  var newIdea = $(
+  ideaList.prepend(
     `<article class="idea-box">
-      <h1 class="idea-title">${title}</h1>
+      <h2 class="idea-title">${title}</h2>
       <img class="delete-idea" />
       <p class="idea-body">${body}</p>
-      <div class="idea-quality">Swillobv</div>`
-      );
-ideaList.prepend(newIdea);
+      <div class="idea-ranking">Swill</div>
+    </article>`);
 }
 
 saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
+  disableSaveButton();
 });
