@@ -72,9 +72,9 @@ function addNewIdeaBox(titleText, bodyText) {
       </div>
     </article>`);
 
-    $('.delete-idea').on('click', function(){
-      $(this).parent().parent().remove();
-    });
+    // $('.delete-idea').on('click', function(){
+    //   $(this).parent().parent().remove();
+    // });
 
     // $('upvote-img').on('click', function(){
     //   $(this).parent().parent().
@@ -87,5 +87,9 @@ function addNewIdeaBox(titleText, bodyText) {
 
 function stringifyAndStore(){
   storageArray.push(currentIdea);
-  console.log(storageArray);
+  // console.log(storageArray);
 }
+
+$('.idea-list').on('click', '.delete-idea', function(){
+  $(this).parent().parent().remove();
+})
