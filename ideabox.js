@@ -10,6 +10,8 @@ var ideaFields = $('#title-input, #body-input');
 $(ideaFields).on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
     $('#save-button').prop('disabled', false);
+  } else {
+    $('#save-button').prop('disabled', true);
   }
 });
 
