@@ -17,8 +17,6 @@ $('#body-input').on('input', function(){
   }
 });
 
-
-
 function NewIdeaConstructor(titleText, bodyText) {
   this.titleText = titleField.val();
   this.bodyText = bodyField.val();
