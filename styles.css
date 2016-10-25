@@ -80,10 +80,12 @@ textarea{
 
 #save-button:hover{
   background-color: #045e55;
+  cursor: pointer;
 }
 
 #save-button:disabled{
-  background-color: #D3D3D3;
+  background-color: #00a79d;
+  cursor: default;
 }
 
 #search-input{
