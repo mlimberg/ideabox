@@ -58,15 +58,14 @@ function addNewIdeaBox(titleText, bodyText) {
         <div class="idea-ranking">Swill</div>
       </div>
     </article>`);
+
+    $('.delete-idea').on('click', function(){
+      $(this).parent().parent().remove();
+    });
 }
 
 saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
-});
-
-$('.idea-list').on('click', $('.delete-idea'), function(){
-  console.log($(this));
-  $(this).children().remove();
 });
