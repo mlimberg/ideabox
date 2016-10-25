@@ -46,12 +46,12 @@ function addNewIdeaBox(titleText, bodyText) {
     `<article class="idea-box">
       <div class="idea-box-header">
         <h2 class="idea-title" contentEditable="true">${title}</h2>
-        <img src="images/delete.svg" class="delete-idea" />
+        <p class="delete-idea"></p>
       </div>
       <p class="idea-body" contentEditable="true">${body}</p>
       <div class="idea-box-footer">
-        <img src="images/upvote.svg" class="upvote-img">
-        <img src="images/downvote.svg" class="downvote-img">
+        <p class="upvote-img"></p>
+        <p class="downvote-img"></p>
         <div class="idea-ranking-quality">quality:</div>
         <div class="idea-ranking">Swill</div>
       </div>
