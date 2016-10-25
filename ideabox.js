@@ -52,7 +52,3 @@ saveButton.on('click', function() {
 $('.delete-idea').on('click', function(){
   $(this).parent().remove();
 });
-
-$('idea-title').on('click', function(){
-  console.log(this);
-});
