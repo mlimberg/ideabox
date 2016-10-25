@@ -113,6 +113,15 @@ textarea{
   float: right;
 }
 
+.upvote-img:hover, .downvote-img:hover, .delete-idea:hover {
+  cursor: pointer;
+}
+
+.delete-idea:hover {
+  background-image: url('Images/delete-hover.svg');
+  background-position: inherit;
+}
+
 .idea-body {
   color: #939598;
   margin: 30px auto;
