@@ -6,35 +6,34 @@ var titleField = $('#title-input');
 var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
 var storageArray = [];
+var currentIdea;
 
 window.onload = retrieveIdeas();
 
 function retrieveIdeas() {
   storageArray = JSON.parse(localStorage.getItem('storageArray'));
-  for (var i = 0; i < storageArray.length; i++) {
-    var title = storageArray[i].titleText;
-    var body = storageArray[i].bodyText;
-    var quality = storageArray[i].quality;
-    var uniqueid = storageArray[i].uniqueid;
-    var idea = new NewIdeaConstructor(title, body, quality, uniqueid);
-    prependIdeas(idea);
-    console.log(storageArray[i].titleText);
-  }
-
-  // storageArray.forEach(function(idea){
-  //   var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid)
-  //   prependIdeas(newIdea);
-  // });
+  storageArray.forEach(function(idea){
+    var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid);
+    prependIdeas(newIdea);
+  });
 }
+  //   for (var i = 0; i < storageArray.length; i++) {
+  //     var title = storageArray[i].titleText;
+  //     var body = storageArray[i].bodyText;
+  //     var quality = storageArray[i].quality;
+  //     var uniqueid = storageArray[i].uniqueid;
+  //     var idea = new NewIdeaConstructor(title, body, quality, uniqueid);
+  //     prependIdeas(idea);
+  //     console.log(storageArray[i].titleText);
+  //   }
 
 saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
   createArray();
-  stringifyArray();
+  storeArray();
 });
-
 
 $(ideaFields).on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
@@ -50,7 +49,7 @@ ideaFields.keypress(function(event){
   }
 });
 
-function NewIdeaConstructor(titleText, bodyText, quality, uniqueid ){
+function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
   this.bodyText = bodyText;
   this.quality =  quality || "swill";
@@ -64,7 +63,7 @@ function clearInputFields() {
 function disableSaveButton() {
   saveButton.prop('disabled', true);
 }
-var currentIdea;
+
 
 function addNewIdeaBox(titleText, bodyText) {
   currentIdea = new NewIdeaConstructor(titleField.val(), bodyField.val());
@@ -105,7 +104,7 @@ function createArray(){
   // console.log(storageArray);
 }
 
-function stringifyArray(){
+function storeArray(){
   localStorage.setItem("storageArray", JSON.stringify(storageArray));
 }
 
