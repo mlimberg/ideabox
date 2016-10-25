@@ -75,6 +75,7 @@ textarea{
   color: white;
   background-color: #00a79d;
   width: 91%;
+  border: none;
 }
 
 #save-button:hover{
