@@ -108,13 +108,17 @@ textarea{
   font-size: 40px;
 }
 
+.upvote-img:hover, .downvote-img:hover, .delete-idea:hover {
+  cursor: pointer;
+}
+
 .delete-idea {
   display: inline-block;
   float: right;
-}
-
-.upvote-img:hover, .downvote-img:hover, .delete-idea:hover {
-  cursor: pointer;
+  background-image: url('Images/delete.svg');
+  height: 40px;
+  width: 40px;
+  vertical-align: bottom;
 }
 
 .delete-idea:hover {
@@ -153,16 +157,30 @@ textarea{
   font-size: 20px;
 }
 
-img {
+.upvote-img, .downvote-img {
   height: 40px;
   width: 40px;
   margin-right: 20px;
+  display: inline-block;
   vertical-align: bottom;
 }
 
-.delete-idea {
-  margin: 0;
+.downvote-img {
+  background: url('Images/downvote.svg')
 }
+
+.upvote-img {
+  background: url('Images/upvote.svg')
+}
+
+.downvote-img:hover{
+  background: url('Images/downvote-hover.svg');
+}
+
+.upvote-img:hover {
+  background: url('Images/upvote-hover.svg');
+}
+
 
 @media screen and (min-width: 900px) {
 
