@@ -4,16 +4,24 @@ var ideaBody = $('.idea-body');
 var saveButton = $('#save-button');
 var titleField = $('#title-input');
 var bodyField = $('#body-input');
+var ideaFields = $('#title-input, #body-input');
 
-$('#title-input').on('input', function(){
+
+$(ideaFields).on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
     $('#save-button').prop('disabled', false);
   }
 });
 
-$('#body-input').on('input', function(){
-  if($('#title-input').val() && $('#body-input').val()){
-    $('#save-button').prop('disabled', false);
+// $('#body-input').on('input', function(){
+//   if($('#title-input').val() && $('#body-input').val()){
+//     $('#save-button').prop('disabled', false);
+//   }
+// });
+
+ideaFields.keypress(function(event){
+  if (event.which == 13) {
+    $('#save-button').click();
   }
 });
 
@@ -36,20 +44,16 @@ function addNewIdeaBox(titleText, bodyText) {
   var body = currentIdea.bodyText;
   ideaList.prepend(
     `<article class="idea-box">
-      <div class="idea-box-title">
+      <div class="idea-box-header">
         <h2 class="idea-title" contentEditable="true">${title}</h2>
-        <img src="images/delete.svg" class="delete-idea" />
+        <p class="delete-idea"></p>
       </div>
       <p class="idea-body" contentEditable="true">${body}</p>
       <div class="idea-box-footer">
-        <img src="images/upvote.svg">
-        <img src="images/downvote.svg">
-        <div class="idea-ranking-quality">
-          quality:
-        </div>
-        <div class="idea-ranking">
-          Swill
-        </div>
+        <p class="upvote-img"></p>
+        <p class="downvote-img"></p>
+        <div class="idea-ranking-quality">quality:</div>
+        <div class="idea-ranking">Swill</div>
       </div>
     </article>`);
 }
