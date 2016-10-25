@@ -35,35 +35,12 @@ saveButton.on('click', function() {
   storeArray();
 });
 
-$(ideaFields).on('input', function(){
-  if($('#title-input').val() && $('#body-input').val()){
-    $('#save-button').prop('disabled', false);
-  } else {
-    $('#save-button').prop('disabled', true);
-  }
-});
-
-ideaFields.keypress(function(event){
-  if (event.which == 13) {
-    $('#save-button').click();
-  }
-});
-
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
   this.bodyText = bodyText;
   this.quality =  quality || "swill";
   this.uniqueid = uniqueid || new Date();
 }
-
-function clearInputFields() {
-  return titleField.val("") && bodyField.val("");
-}
-
-function disableSaveButton() {
-  saveButton.prop('disabled', true);
-}
-
 
 function addNewIdeaBox(titleText, bodyText) {
   currentIdea = new NewIdeaConstructor(titleField.val(), bodyField.val());
@@ -86,18 +63,14 @@ function prependIdeas(currentIdea) {
       </div>
     </article>`);
 }
-    // $('.delete-idea').on('click', function(){
-    //   $(this).parent().parent().remove();
-    // });
 
-    // $('upvote-img').on('click', function(){
-    //   $(this).parent().parent().
-    // })
-    //
-    // $('downvote-img').on('click', function(){
-    //   $(this).parent().parent().
-    // })
+function clearInputFields() {
+  return titleField.val("") && bodyField.val("");
+}
 
+function disableSaveButton() {
+  saveButton.prop('disabled', true);
+}
 
 function createArray(){
   storageArray.push(currentIdea);
@@ -108,6 +81,46 @@ function storeArray(){
   localStorage.setItem("storageArray", JSON.stringify(storageArray));
 }
 
+
+
 $('.idea-list').on('click', '.delete-idea', function(){
   $(this).parent().parent().remove();
 });
+
+
+
+$(ideaFields).on('input', function(){
+  if($('#title-input').val() && $('#body-input').val()){
+    $('#save-button').prop('disabled', false);
+  } else {
+    $('#save-button').prop('disabled', true);
+  }
+});
+
+ideaFields.keypress(function(event){
+  if (event.which == 13) {
+    $('#save-button').click();
+  }
+});
+
+
+
+
+
+
+
+
+
+
+    // $('.delete-idea').on('click', function(){
+    //   $(this).parent().parent().remove();
+    // });
+    //
+    // $('upvote-img').on('click', function(){
+    //   $(this).parent().parent().
+    // })
+    //
+    // $('downvote-img').on('click', function(){
+    //   $(this).parent().parent().
+    // })
+    //
