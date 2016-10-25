@@ -17,8 +17,6 @@ $('#body-input').on('input', function(){
   }
 });
 
-
-
 function NewIdeaConstructor(titleText, bodyText) {
   this.titleText = titleField.val();
   this.bodyText = bodyField.val();
@@ -49,4 +47,12 @@ saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
+});
+
+$('.delete-idea').on('click', function(){
+  $(this).parent().remove();
+});
+
+$('idea-title').on('click', function(){
+  console.log(this);
 });
