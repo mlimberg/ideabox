@@ -13,7 +13,8 @@ saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
-  stringifyAndStore();
+  createArray();
+  stringifyArray();
 });
 
 
@@ -85,11 +86,15 @@ function addNewIdeaBox(titleText, bodyText) {
     // })
 }
 
-function stringifyAndStore(){
+function createArray(){
   storageArray.push(currentIdea);
   // console.log(storageArray);
 }
 
+function stringifyArray(){
+  localStorage.setItem("storageArray", JSON.stringify(storageArray));
+}
+
 $('.idea-list').on('click', '.delete-idea', function(){
   $(this).parent().parent().remove();
-})
+});
