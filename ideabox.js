@@ -4,16 +4,24 @@ var ideaBody = $('.idea-body');
 var saveButton = $('#save-button');
 var titleField = $('#title-input');
 var bodyField = $('#body-input');
+var ideaFields = $('#title-input, #body-input');
 
-$('#title-input').on('input', function(){
+
+$(ideaFields).on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
     $('#save-button').prop('disabled', false);
   }
 });
 
-$('#body-input').on('input', function(){
-  if($('#title-input').val() && $('#body-input').val()){
-    $('#save-button').prop('disabled', false);
+// $('#body-input').on('input', function(){
+//   if($('#title-input').val() && $('#body-input').val()){
+//     $('#save-button').prop('disabled', false);
+//   }
+// });
+
+ideaFields.keypress(function(event){
+  if (event.which == 13) {
+    $('#save-button').click();
   }
 });
 
