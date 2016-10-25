@@ -62,6 +62,14 @@ function addNewIdeaBox(titleText, bodyText) {
     $('.delete-idea').on('click', function(){
       $(this).parent().parent().remove();
     });
+
+    $('upvote-img').on('click', function(){
+      $(this).parent().parent().
+    })
+
+    $('downvote-img').on('click', function(){
+      $(this).parent().parent().
+    })
 }
 
 saveButton.on('click', function() {
