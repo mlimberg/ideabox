@@ -5,11 +5,24 @@ var saveButton = $('#save-button');
 var titleField = $('#title-input');
 var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
-var count = 0;
 var storageArray = [];
 
+window.onload = retrieveIdeas();
+
+function retrieveIdeas() {
+  storageArray = JSON.parse(localStorage.getItem('storageArray'));
+  for (var i = 0; i <= storageArray.length; i++) {
+    var title = storageArray[i];
+    var body = storageArray[i];
+    var quality = storageArray[i];
+    var uniqueid = storageArray[i];
+    addNewIdeaBox(title, body, quality, uniqueid);
+    console.log(storageArray[i]);
+  }
+}
+
+
 saveButton.on('click', function() {
-  count++;
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
@@ -26,12 +39,6 @@ $(ideaFields).on('input', function(){
   }
 });
 
-// $('#body-input').on('input', function(){
-//   if($('#title-input').val() && $('#body-input').val()){
-//     $('#save-button').prop('disabled', false);
-//   }
-// });
-
 ideaFields.keypress(function(event){
   if (event.which == 13) {
     $('#save-button').click();
@@ -42,7 +49,7 @@ function NewIdeaConstructor(titleText, bodyText) {
   this.titleText = titleField.val();
   this.bodyText = bodyField.val();
   this.quality = "swill";
-  this.idcount = count;
+  this.uniqueid = new Date();
 }
 
 function clearInputFields() {
