@@ -85,6 +85,19 @@ $('.idea-list').on('click', '.upvote', function(){
   getAndClearAndDisplayIdeas();
 });
 
+$('.idea-list').on('click', '.downvote', function(){
+  var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
+  var quality;
+  var ideaID = this.closest('article').id;
+  if (qualityStatus.text() == 'genius'){
+    quality = 'plausible';
+  } else if (qualityStatus.text() === 'plausible'){
+    quality = 'swill';
+  }
+  storeUpdate(ideaID, 'quality', quality);
+  getAndClearAndDisplayIdeas();
+});
+
 function storeUpdate(id, attribute, newValue) {
   for (var i = 0; i < localStorage.length; i++) {
     var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -109,25 +122,6 @@ function getAndClearAndDisplayIdeas() {
 }
 }
 
-
-
-
-
-
-
-
-
-
-$('.idea-list').on('click', '.downvote', function(){
-var qualityStatus = $(this).siblings('.idea-ranking');
- if (qualityStatus.html() === 'genius'){
-qualityStatus.replaceWith(`<div class="idea-ranking">plausible</div>`)
-} else if (qualityStatus.html() === 'plausible'){
-  qualityStatus.replaceWith(`<div class="idea-ranking">swill</div>`)
-}
-});
-//swill  -  plausible  -  genius
-
 $(ideaFields).on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
     $('#save-button').prop('disabled', false);
@@ -137,7 +131,10 @@ $(ideaFields).on('input', function(){
 });
 
 ideaFields.keypress(function(event) {
-   if (event.which === 13) {
+  if(event.which === 13) {
+    event.preventDefault();
+  }
+   if (event.which === 13 && titleField.val() && bodyField.val()) {
      addNewIdeaBox();
      clearInputFields();
      disableSaveButton();
