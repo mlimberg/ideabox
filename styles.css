@@ -92,6 +92,10 @@ textarea{
   margin-top: 20px;
 }
 
+.hidden {
+  display: none;
+}
+
 .idea-box {
   width: 90%;
   margin: 30px auto;

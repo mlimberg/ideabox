@@ -54,6 +54,22 @@ function prependIdeas(currentIdea) {
     </article>`);
 }
 
+$(document).ready(function() {
+  $("#search-input").keyup(function(){
+   //  escape = function(text) {
+   //   return text.replace(/[-[\]{}()*?.,\\^$|#\s]/g, "\\$&");
+   // };
+    var filter = $(this).val();
+    $(".idea-list").each(function() {
+    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+      $(this).addClass('hidden');
+    } else {
+      $(this).removeClass('hidden');
+    }
+  });
+});
+})
+
 function clearInputFields() {
   return titleField.val("") && bodyField.val("");
 }
