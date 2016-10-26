@@ -7,21 +7,6 @@ var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
 var storageArray = [];
 
-// retrieveIdeas();
-
-// function retrieveIdeas() {
-//   if (localStorage.length === 0) {
-//   } else {
-//   storageArray = JSON.parse(localStorage.getItem('storageArray'));
-//   storageArray.forEach(function(idea){
-//     var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid);
-//     prependIdeas(newIdea);
-//   });
-// }
-
-
-
-
 for (var i = 0; i < localStorage.length; i++) {
   var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
   prependIdeas(idea);
@@ -91,24 +76,21 @@ $(ideaFields).on('input', function(){
   }
 });
 
-ideaFields.keypress(function(event){
-  if (event.which == 13) {
-    $('#save-button').click();
-  }
-});
+ideaFields.keypress(function(event) {
+   if (event.which === 13) {
+     addNewIdeaBox();
+     clearInputFields();
+     disableSaveButton();
+     storeObject();
+   }
+ });
 
 
+    $('.delete-idea').on('click', function(){
+      localStorage.removeItem(localStorage.key(0));
+      $(this).parent().parent().remove();
 
-
-
-
-
-
-
-
-    // $('.delete-idea').on('click', function(){
-    //   $(this).parent().parent().remove();
-    // });
+    });
     //
     // $('upvote-img').on('click', function(){
     //   $(this).parent().parent().
