@@ -137,7 +137,10 @@ $(ideaFields).on('input', function(){
 });
 
 ideaFields.keypress(function(event) {
-   if (event.which === 13) {
+  if(event.which === 13) {
+    event.preventDefault();
+  }
+   if (event.which === 13 && titleField.val() && bodyField.val()) {
      addNewIdeaBox();
      clearInputFields();
      disableSaveButton();
