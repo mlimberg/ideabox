@@ -5,6 +5,7 @@ var saveButton = $('#save-button');
 var titleField = $('#title-input');
 var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
+var ideaBox = $('.idea-box');
 var storageArray = [];
 var currentIdea;
 
@@ -40,11 +41,13 @@ function addNewIdeaBox(titleText, bodyText) {
 function prependIdeas(currentIdea) {
   ideaList.prepend(
     `<article id=${currentIdea.uniqueid} class="idea-box">
-      <div class="idea-box-header">
-        <h2 class="idea-title" contentEditable="true">${currentIdea.titleText}</h2>
-        <p class="delete-idea"></p>
+      <div class="search-field">
+        <div class="idea-box-header">
+          <h2 class="idea-title" contentEditable="true">${currentIdea.titleText}</h2>
+          <p class="delete-idea"></p>
+        </div>
+        <p class="idea-body" contentEditable="true">${currentIdea.bodyText}</p>
       </div>
-      <p class="idea-body" contentEditable="true">${currentIdea.bodyText}</p>
       <div class="idea-box-footer">
         <p class="upvote"></p>
         <p class="downvote"></p>
@@ -54,21 +57,17 @@ function prependIdeas(currentIdea) {
     </article>`);
 }
 
-$(document).ready(function() {
-  $("#search-input").keyup(function(){
-   //  escape = function(text) {
-   //   return text.replace(/[-[\]{}()*?.,\\^$|#\s]/g, "\\$&");
-   // };
-    var filter = $(this).val();
-    $(".idea-list").each(function() {
+$("#search-input").keyup(function(){
+
+  var filter = $(this).val();
+  $(".idea-list .search-field").each(function() {
     if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-      $(this).addClass('hidden');
+      $(this).parent().addClass('hidden');
     } else {
       $(this).removeClass('hidden');
     }
   });
 });
-})
 
 function clearInputFields() {
   return titleField.val("") && bodyField.val("");
