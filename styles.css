@@ -111,7 +111,7 @@ textarea{
   font-size: 40px;
 }
 
-.upvote-img:hover, .downvote-img:hover, .delete-idea:hover {
+.upvote:hover, .downvote:hover, .delete-idea:hover {
   cursor: pointer;
 }
 
@@ -160,7 +160,7 @@ textarea{
   font-size: 20px;
 }
 
-.upvote-img, .downvote-img {
+.upvote, .downvote {
   height: 40px;
   width: 40px;
   margin-right: 20px;
@@ -168,19 +168,19 @@ textarea{
   vertical-align: bottom;
 }
 
-.downvote-img {
+.downvote {
   background: url('Images/downvote.svg')
 }
 
-.upvote-img {
+.upvote {
   background: url('Images/upvote.svg')
 }
 
-.downvote-img:hover{
+.downvote:hover{
   background: url('Images/downvote-hover.svg');
 }
 
-.upvote-img:hover {
+.upvote:hover {
   background: url('Images/upvote-hover.svg');
 }
 
