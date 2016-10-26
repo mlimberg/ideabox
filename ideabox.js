@@ -6,26 +6,29 @@ var titleField = $('#title-input');
 var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
 var storageArray = [];
-var currentIdea;
 
-window.onload = retrieveIdeas();
+retrieveIdeas();
 
 function retrieveIdeas() {
+  if (localStorage.length === 0) {
+  } else {
   storageArray = JSON.parse(localStorage.getItem('storageArray'));
   storageArray.forEach(function(idea){
     var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid);
     prependIdeas(newIdea);
   });
 }
-  //   for (var i = 0; i < storageArray.length; i++) {
-  //     var title = storageArray[i].titleText;
-  //     var body = storageArray[i].bodyText;
-  //     var quality = storageArray[i].quality;
-  //     var uniqueid = storageArray[i].uniqueid;
-  //     var idea = new NewIdeaConstructor(title, body, quality, uniqueid);
-  //     prependIdeas(idea);
-  //     console.log(storageArray[i].titleText);
-  //   }
+}
+//   for (var i = 0; i < storageArray.length; i++) {
+//     var title = storageArray[i].titleText;
+//     var body = storageArray[i].bodyText;
+//     var quality = storageArray[i].quality;
+//     var uniqueid = storageArray[i].uniqueid;
+//     var idea = new NewIdeaConstructor(title, body, quality, uniqueid);
+//     prependIdeas(idea);
+//     console.log(storageArray[i].titleText);
+//   }
+// }
 
 saveButton.on('click', function() {
   addNewIdeaBox();
@@ -44,8 +47,10 @@ function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
 
 function addNewIdeaBox(titleText, bodyText) {
   currentIdea = new NewIdeaConstructor(titleField.val(), bodyField.val());
-  prependIdeas(currentIdea.titleText, currentIdea.bodyText, currentIdea.quality);
+  prependIdeas(currentIdea);
 }
+
+var currentIdea;
 
 function prependIdeas(currentIdea) {
   ideaList.prepend(
@@ -80,8 +85,6 @@ function createArray(){
 function storeArray(){
   localStorage.setItem("storageArray", JSON.stringify(storageArray));
 }
-
-
 
 $('.idea-list').on('click', '.delete-idea', function(){
   $(this).parent().parent().remove();
