@@ -7,42 +7,23 @@ var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
 var storageArray = [];
 
-retrieveIdeas();
-
-function retrieveIdeas() {
-  if (localStorage.length === 0) {
-  } else {
-  storageArray = JSON.parse(localStorage.getItem('storageArray'));
-  storageArray.forEach(function(idea){
-    var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid);
-    prependIdeas(newIdea);
-  });
+for (var i = 0; i < localStorage.length; i++) {
+  var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
+  prependIdeas(idea);
 }
-}
-//   for (var i = 0; i < storageArray.length; i++) {
-//     var title = storageArray[i].titleText;
-//     var body = storageArray[i].bodyText;
-//     var quality = storageArray[i].quality;
-//     var uniqueid = storageArray[i].uniqueid;
-//     var idea = new NewIdeaConstructor(title, body, quality, uniqueid);
-//     prependIdeas(idea);
-//     console.log(storageArray[i].titleText);
-//   }
-// }
 
 saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
-  createArray();
-  storeArray();
+  storeObject();
 });
 
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
   this.bodyText = bodyText;
   this.quality =  quality || "swill";
-  this.uniqueid = uniqueid || new Date();
+  this.uniqueid = uniqueid || Date.now();
 }
 
 function addNewIdeaBox(titleText, bodyText) {
@@ -77,17 +58,15 @@ function disableSaveButton() {
   saveButton.prop('disabled', true);
 }
 
-function createArray(){
-  storageArray.push(currentIdea);
-  // console.log(storageArray);
+function storeObject(){
+  localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
-function storeArray(){
-  localStorage.setItem("storageArray", JSON.stringify(storageArray));
-}
 
 $('.idea-list').on('click', '.delete-idea', function(){
+  var ideaId = this.closest('article').id;
   $(this).parent().parent().remove();
+  localStorage.removeItem(ideaId);
 });
 
 
@@ -100,24 +79,17 @@ $(ideaFields).on('input', function(){
   }
 });
 
-ideaFields.keypress(function(event){
-  if (event.which == 13) {
-    $('#save-button').click();
-  }
-});
+ideaFields.keypress(function(event) {
+   if (event.which === 13) {
+     addNewIdeaBox();
+     clearInputFields();
+     disableSaveButton();
+     storeObject();
+   }
+ });
 
 
 
-
-
-
-
-
-
-
-    // $('.delete-idea').on('click', function(){
-    //   $(this).parent().parent().remove();
-    // });
     //
     // $('upvote-img').on('click', function(){
     //   $(this).parent().parent().

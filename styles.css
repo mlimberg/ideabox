@@ -84,7 +84,7 @@ textarea{
 }
 
 #save-button:disabled{
-  background-color: #00a79d;
+  background-color: #D3D3D3;
   cursor: default;
 }
 
