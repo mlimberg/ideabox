@@ -64,7 +64,8 @@ $("#search-input").keyup(function(){
     if ($(this).text().search(new RegExp(filter, "i")) < 0) {
       $(this).parent().addClass('hidden');
     } else {
-      $(this).removeClass('hidden');
+      // $(this).removeClass('hidden');
+      getAndClearAndDisplayIdeas();
     }
   });
 });
