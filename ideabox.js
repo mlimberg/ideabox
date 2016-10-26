@@ -96,8 +96,39 @@ $('.idea-list').on('click', '.upvote', function(){
     quality = 'plausible';
   } else if (qualityStatus.text() === 'plausible'){
     quality = 'genius';
+  }else if (qualityStatus.text() === 'genius'){
+    return false;
   }
   storeUpdate(ideaID, 'quality', quality);
+  getAndClearAndDisplayIdeas();
+});
+
+$('.idea-list').on('click', '.downvote', function(event){
+  var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
+  var quality;
+  var ideaID = this.closest('article').id;
+  if (qualityStatus.text() == 'genius'){
+    quality = 'plausible';
+  } else if (qualityStatus.text() === 'plausible'){
+    quality = 'swill';
+  } else if (qualityStatus.text() === 'swill'){
+    return false;
+  }
+  storeUpdate(ideaID, 'quality', quality);
+  getAndClearAndDisplayIdeas();
+});
+
+$('.idea-list').on('blur', '.idea-title', function(){
+  var title = $(this).text();
+  var ideaID = this.closest('article').id;
+  storeUpdate(ideaID, 'title', title);
+  getAndClearAndDisplayIdeas();
+});
+
+$('.idea-list').on('blur', '.idea-body', function(){
+  var body = $(this).text();
+  var ideaID = this.closest('article').id;
+  storeUpdate(ideaID, 'body', body);
   getAndClearAndDisplayIdeas();
 });
 
@@ -108,9 +139,9 @@ function storeUpdate(id, attribute, newValue) {
       if (attribute === 'quality') {
         idea.quality = newValue;
       } else if (attribute === 'title') {
-        idea.title = newValue;
+        idea.titleText = newValue;
       } else if (attribute === 'body') {
-        idea.body = newValue;
+        idea.bodyText = newValue;
       }
       localStorage.setItem(parseInt(id), JSON.stringify(idea));
     }
@@ -125,25 +156,6 @@ function getAndClearAndDisplayIdeas() {
 }
 }
 
-
-
-
-
-
-
-
-
-
-$('.idea-list').on('click', '.downvote', function(){
-var qualityStatus = $(this).siblings('.idea-ranking');
- if (qualityStatus.html() === 'genius'){
-qualityStatus.replaceWith(`<div class="idea-ranking">plausible</div>`)
-} else if (qualityStatus.html() === 'plausible'){
-  qualityStatus.replaceWith(`<div class="idea-ranking">swill</div>`)
-}
-});
-//swill  -  plausible  -  genius
-
 $(ideaFields).on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
     $('#save-button').prop('disabled', false);
@@ -153,7 +165,10 @@ $(ideaFields).on('input', function(){
 });
 
 ideaFields.keypress(function(event) {
-   if (event.which === 13) {
+  if(event.which === 13) {
+    event.preventDefault();
+  }
+   if (event.which === 13 && titleField.val() && bodyField.val()) {
      addNewIdeaBox();
      clearInputFields();
      disableSaveButton();
