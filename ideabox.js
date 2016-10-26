@@ -69,7 +69,7 @@ $('.idea-list').on('click', '.delete-idea', function(){
 });
 
 $('.idea-list').on('click', '.upvote', function(){
-var qualityStatus = $('div').eq(4);
+var qualityStatus = $(this).siblings('.idea-ranking');
  if (qualityStatus.html() === 'swill'){
 qualityStatus.replaceWith(`<div class="idea-ranking">plausible</div>`)
 } else if (qualityStatus.html() === 'plausible'){
@@ -78,7 +78,7 @@ qualityStatus.replaceWith(`<div class="idea-ranking">plausible</div>`)
 });
 
 $('.idea-list').on('click', '.downvote', function(){
-var qualityStatus = $('div').eq(4);
+var qualityStatus = $(this).siblings('.idea-ranking');
  if (qualityStatus.html() === 'genius'){
 qualityStatus.replaceWith(`<div class="idea-ranking">plausible</div>`)
 } else if (qualityStatus.html() === 'plausible'){
