@@ -62,10 +62,9 @@ function storeObject(){
   localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
-
 $('.idea-list').on('click', '.delete-idea', function(){
   var ideaId = this.closest('article').id;
-  $(this).parent().parent().remove();
+  $(this).closest('article').remove();
   localStorage.removeItem(ideaId);
 });
 
@@ -91,9 +90,9 @@ ideaFields.keypress(function(event) {
 
 
     //
-    // $('upvote-img').on('click', function(){
-    //   $(this).parent().parent().
-    // })
+    $('upvote-img').on('click', function(){
+      $(this).parent().parent().
+    })
     //
     // $('downvote-img').on('click', function(){
     //   $(this).parent().parent().
