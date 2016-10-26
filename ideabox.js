@@ -23,7 +23,7 @@ function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
   this.bodyText = bodyText;
   this.quality =  quality || "swill";
-  this.uniqueid = uniqueid || new Date();
+  this.uniqueid = uniqueid || Date.now();
 }
 
 function addNewIdeaBox(titleText, bodyText) {
@@ -62,8 +62,11 @@ function storeObject(){
   localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
+
 $('.idea-list').on('click', '.delete-idea', function(){
+  var ideaId = this.closest('article').id;
   $(this).parent().parent().remove();
+  localStorage.removeItem(ideaId);
 });
 
 
@@ -86,11 +89,7 @@ ideaFields.keypress(function(event) {
  });
 
 
-    $('.delete-idea').on('click', function(){
-      localStorage.removeItem(localStorage.key(0));
-      $(this).parent().parent().remove();
 
-    });
     //
     // $('upvote-img').on('click', function(){
     //   $(this).parent().parent().
