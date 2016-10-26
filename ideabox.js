@@ -7,35 +7,31 @@ var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
 var storageArray = [];
 
-retrieveIdeas();
+// retrieveIdeas();
 
-function retrieveIdeas() {
-  if (localStorage.length === 0) {
-  } else {
-  storageArray = JSON.parse(localStorage.getItem('storageArray'));
-  storageArray.forEach(function(idea){
-    var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid);
-    prependIdeas(newIdea);
-  });
-}
-}
-//   for (var i = 0; i < storageArray.length; i++) {
-//     var title = storageArray[i].titleText;
-//     var body = storageArray[i].bodyText;
-//     var quality = storageArray[i].quality;
-//     var uniqueid = storageArray[i].uniqueid;
-//     var idea = new NewIdeaConstructor(title, body, quality, uniqueid);
-//     prependIdeas(idea);
-//     console.log(storageArray[i].titleText);
-//   }
+// function retrieveIdeas() {
+//   if (localStorage.length === 0) {
+//   } else {
+//   storageArray = JSON.parse(localStorage.getItem('storageArray'));
+//   storageArray.forEach(function(idea){
+//     var newIdea = new NewIdeaConstructor(idea.titleText, idea.bodyText, idea.quality, idea.uniqueid);
+//     prependIdeas(newIdea);
+//   });
 // }
+
+
+
+
+for (var i = 0; i < localStorage.length; i++) {
+  var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
+  prependIdeas(idea);
+}
 
 saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
-  createArray();
-  storeArray();
+  storeObject();
 });
 
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
@@ -77,13 +73,8 @@ function disableSaveButton() {
   saveButton.prop('disabled', true);
 }
 
-function createArray(){
-  storageArray.push(currentIdea);
-  // console.log(storageArray);
-}
-
-function storeArray(){
-  localStorage.setItem("storageArray", JSON.stringify(storageArray));
+function storeObject(){
+  localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
 $('.idea-list').on('click', '.delete-idea', function(){
