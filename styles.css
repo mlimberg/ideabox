@@ -90,20 +90,24 @@ textarea{
 
 #search-input{
   margin-top: 20px;
-  margin-left: 5%;
+  margin-left: 4%;
   width: 70%;
   display: inline;
-
 }
 
 #sort-button {
-width: 20%;
-height: 40px;
-display: inline;
-font-size: 20px;
-color: white;
-background-color: #00a79d;
-border: none;
+  width: 20%;
+  height: 40px;
+  display: inline;
+  font-size: 20px;
+  color: white;
+  background-color: #00a79d;
+  border: none;
+}
+
+#sort-button:hover{
+  background-color: #045e55;
+  cursor: pointer;
 }
 
 .idea-box {
@@ -118,7 +122,6 @@ border: none;
   width: 100%;
   text-align: left;
   overflow: scroll;
-
 }
 
 .idea-title {
@@ -198,7 +201,7 @@ border: none;
   background: url('Images/upvote.svg')
 }
 
-.downvote:hover{
+.downvote:hover {
   background: url('Images/downvote-hover.svg');
 }
 
@@ -214,12 +217,17 @@ border: none;
     width: 814px;
 }
 
-#save-button{
+#save-button {
     width: 820px;
 }
 
 .idea-box {
   width: 820px;
+}
+
+.search-sort {
+  width: 901px;
+  margin: auto;
 }
 
 .hidden {
