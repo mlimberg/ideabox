@@ -26,6 +26,37 @@ saveButton.on('click', function() {
   getAndClearAndDisplayIdeas();
 });
 
+$('#sort-button').on('click', function(){
+  var swill = [];
+  var plausible = [];
+  var genius = [];
+  $('.idea-box').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if(idea.quality === 'swill'){
+      swill.push(idea);
+    }
+    else if(idea.quality === 'plausible'){
+      plausible.push(idea);
+    }
+    else if(idea.quality === 'genius'){
+      genius.push(idea);
+    }
+  }
+for (i=0; i < swill.length ; i++) {
+  prependIdeas(swill[i]);
+}
+for (i=0; i < plausible.length ; i++) {
+  prependIdeas(plausible[i]);
+}
+for (i=0; i < genius.length ; i++) {
+  prependIdeas(genius[i]);
+}
+
+
+  // });
+});
+
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
   this.bodyText = bodyText;
