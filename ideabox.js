@@ -8,6 +8,7 @@ var ideaFields = $('#title-input, #body-input');
 var ideaBox = $('.idea-box');
 var storageArray = [];
 var currentIdea;
+var count = 0;
 
 getAndDisplayIdeas();
 
@@ -27,12 +28,14 @@ saveButton.on('click', function() {
 });
 
 $('#sort-button').on('click', function(){
+
   var swill = [];
   var plausible = [];
   var genius = [];
   $('.idea-box').remove();
-  for (var i = 0; i < localStorage.length; i++) {
-    var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+  for (var i = 0; i < $('.idea-box').length; i++) {
+    var idea = $('.idea-box[i]');
     if(idea.quality === 'swill'){
       swill.push(idea);
     }
@@ -43,18 +46,31 @@ $('#sort-button').on('click', function(){
       genius.push(idea);
     }
   }
-for (i=0; i < swill.length ; i++) {
-  prependIdeas(swill[i]);
-}
-for (i=0; i < plausible.length ; i++) {
-  prependIdeas(plausible[i]);
-}
-for (i=0; i < genius.length ; i++) {
-  prependIdeas(genius[i]);
-}
 
+  if (count === 0) {
+    for (i=0; i < swill.length ; i++) {
+      prependIdeas(swill[i]);
+    }
+    for (i=0; i < plausible.length ; i++) {
+      prependIdeas(plausible[i]);
+    }
+    for (i=0; i < genius.length ; i++) {
+      prependIdeas(genius[i]);
+    }
+    return count++;
 
-  // });
+  } else if (count === 1){
+    for (i=0; i < genius.length ; i++) {
+      prependIdeas(genius[i]);
+    }
+    for (i=0; i < plausible.length ; i++) {
+      prependIdeas(plausible[i]);
+    }
+    for (i=0; i < swill.length ; i++) {
+      prependIdeas(swill[i]);
+    return count--;
+  }
+}
 });
 
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
