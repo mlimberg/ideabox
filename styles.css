@@ -111,6 +111,8 @@ textarea{
   color: #6D6E71;
   display: inline-block;
   font-size: 40px;
+  overflow: visible;
+  width: 95%;
 }
 
 .upvote:hover, .downvote:hover, .delete-idea:hover {
