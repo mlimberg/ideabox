@@ -104,7 +104,6 @@ textarea{
   width: 100%;
   text-align: left;
   overflow: scroll;
-
 }
 
 .idea-title {
@@ -113,6 +112,7 @@ textarea{
   font-size: 40px;
   overflow: visible;
   width: 95%;
+  margin-bottom: 15px;
 }
 
 .upvote:hover, .downvote:hover, .delete-idea:hover {
