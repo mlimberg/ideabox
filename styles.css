@@ -90,6 +90,20 @@ textarea{
 
 #search-input{
   margin-top: 20px;
+  margin-left: 5%;
+  width: 70%;
+  display: inline;
+
+}
+
+#sort-button {
+width: 20%;
+height: 40px;
+display: inline;
+font-size: 20px;
+color: white;
+background-color: #00a79d;
+border: none;
 }
 
 .idea-box {
@@ -174,6 +188,10 @@ textarea{
 
 .downvote {
   background: url('Images/downvote.svg')
+}
+
+.search-sort {
+  position: relative;
 }
 
 .upvote {
