@@ -57,19 +57,6 @@ function prependIdeas(currentIdea) {
     </article>`);
 }
 
-$("#search-input").keyup(function(){
-
-  var filter = $(this).val();
-  $(".idea-list .search-field").each(function() {
-    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-      $(this).parent().addClass('hidden');
-    } else {
-      // $(this).removeClass('hidden');
-      getAndClearAndDisplayIdeas();
-    }
-  });
-});
-
 function clearInputFields() {
   return titleField.val("") && bodyField.val("");
 }
@@ -174,4 +161,15 @@ ideaFields.keypress(function(event) {
      disableSaveButton();
      storeNewObject();
    }
+ });
+
+ $("#search-input").keyup(function(){
+   var filter = $(this).val();
+   $(".search-field").each(function() {
+     if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+       $(this).parent().addClass('hidden');
+     } else {
+       $(this).parent().removeClass('hidden');
+     }
+   });
  });
