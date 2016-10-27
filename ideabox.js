@@ -116,6 +116,24 @@ $('.idea-list').on('blur', '.idea-body', function(){
   getAndClearAndDisplayIdeas();
 });
 
+$('.idea-list').on('keypress', '.idea-title', function(e){
+  var title = $(this).text();
+  var ideaID = this.closest('article').id;
+  if(e.which === 13) {
+    storeUpdate(ideaID, 'title', title);
+    getAndClearAndDisplayIdeas();
+}
+});
+
+$('.idea-list').on('keypress', '.idea-body', function(e){
+  var body = $(this).text();
+  var ideaID = this.closest('article').id;
+  if(e.which === 13) {
+    storeUpdate(ideaID, 'body', body);
+    getAndClearAndDisplayIdeas();
+}
+});
+
 function storeUpdate(id, attribute, newValue) {
   for (var i = 0; i < localStorage.length; i++) {
     var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
