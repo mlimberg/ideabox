@@ -9,7 +9,7 @@ var ideaBox = $('.idea-box');
 var storageArray = [];
 var currentIdea;
 
-getAndDisplayIdeas()
+getAndDisplayIdeas();
 
 function getAndDisplayIdeas() {
   for (var i = 0; i < localStorage.length; i++) {
@@ -18,12 +18,12 @@ function getAndDisplayIdeas() {
   }
 }
 
-
 saveButton.on('click', function() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
   storeNewObject();
+  getAndClearAndDisplayIdeas();
 });
 
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
@@ -58,7 +58,8 @@ function prependIdeas(currentIdea) {
 }
 
 function clearInputFields() {
-  return titleField.val("") && bodyField.val("");
+  return titleField.val("") && bodyField.val("") && $('#search-input').val("");
+
 }
 
 function disableSaveButton() {
