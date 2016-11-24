@@ -1,7 +1,6 @@
 var ideaList = $('.idea-list');
 var ideaTitle = $('.idea-title');
 var ideaBody = $('.idea-body');
-var saveButton = $('#save-button');
 var titleField = $('#title-input');
 var bodyField = $('#body-input');
 var ideaFields = $('#title-input, #body-input');
@@ -10,6 +9,7 @@ var storageArray = [];
 var currentIdea;
 
 getAndDisplayIdeas();
+setEventListeners();
 
 function getAndDisplayIdeas() {
   for (var i = 0; i < localStorage.length; i++) {
@@ -18,13 +18,20 @@ function getAndDisplayIdeas() {
   }
 }
 
-saveButton.on('click', function() {
+function setEventListeners() {
+  $('#save-button').on('click', () => {
+    postSaveAndDisplayIdea();
+  });
+
+}
+
+function postSaveAndDisplayIdea() {
   addNewIdeaBox();
   clearInputFields();
   disableSaveButton();
   storeNewObject();
   getAndClearAndDisplayIdeas();
-});
+}
 
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
@@ -63,7 +70,7 @@ function clearInputFields() {
 }
 
 function disableSaveButton() {
-  saveButton.prop('disabled', true);
+  $('#save-button').prop('disabled', true);
 }
 
 function storeNewObject(){
