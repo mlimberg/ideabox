@@ -1,15 +1,6 @@
-var ideaList = $('.idea-list');
-var ideaTitle = $('.idea-title');
-var ideaBody = $('.idea-body');
-var saveButton = $('#save-button');
-var titleField = $('#title-input');
-var bodyField = $('#body-input');
-var ideaFields = $('#title-input, #body-input');
-var ideaBox = $('.idea-box');
-var storageArray = [];
-var currentIdea;
 
 getAndDisplayIdeas();
+setEventListeners();
 
 function getAndDisplayIdeas() {
   for (var i = 0; i < localStorage.length; i++) {
@@ -18,13 +9,19 @@ function getAndDisplayIdeas() {
   }
 }
 
-saveButton.on('click', function() {
-  addNewIdeaBox();
+function setEventListeners() {
+  $('#save-button').on('click', () => {
+    postSaveAndDisplayIdea();
+  });
+
+}
+
+function postSaveAndDisplayIdea() {
+  postAndStoreIdea();
   clearInputFields();
   disableSaveButton();
-  storeNewObject();
-  getAndClearAndDisplayIdeas();
-});
+  refreshIdeaListFromStorage();
+}
 
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
@@ -33,13 +30,16 @@ function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.uniqueid = uniqueid || Date.now();
 }
 
-function addNewIdeaBox(titleText, bodyText) {
-  currentIdea = new NewIdeaConstructor(titleField.val(), bodyField.val());
+function postAndStoreIdea() {
+  let titleField = $('#title-input');
+  let bodyField = $('#body-input');
+  let currentIdea = new NewIdeaConstructor(titleField.val(), bodyField.val());
   prependIdeas(currentIdea);
+  storeNewObject(currentIdea);
 }
 
 function prependIdeas(currentIdea) {
-  ideaList.prepend(
+  $('.idea-list').prepend(
     `<article id=${currentIdea.uniqueid} class="idea-box">
       <div class="search-field">
         <div class="idea-box-header">
@@ -58,15 +58,17 @@ function prependIdeas(currentIdea) {
 }
 
 function clearInputFields() {
+  let titleField = $('#title-input');
+  let bodyField = $('#body-input');
   return titleField.val("") && bodyField.val("") && $('#search-input').val("");
 
 }
 
 function disableSaveButton() {
-  saveButton.prop('disabled', true);
+  $('#save-button').prop('disabled', true);
 }
 
-function storeNewObject(){
+function storeNewObject(currentIdea){
   localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
@@ -88,7 +90,7 @@ $('.idea-list').on('click', '.upvote', function(){
     return false;
   }
   storeUpdate(ideaID, 'quality', quality);
-  getAndClearAndDisplayIdeas();
+  refreshIdeaListFromStorage();
 });
 
 $('.idea-list').on('click', '.downvote', function(event){
@@ -103,21 +105,21 @@ $('.idea-list').on('click', '.downvote', function(event){
     return false;
   }
   storeUpdate(ideaID, 'quality', quality);
-  getAndClearAndDisplayIdeas();
+  refreshIdeaListFromStorage();
 });
 
 $('.idea-list').on('blur', '.idea-title', function(){
   var title = $(this).text();
   var ideaID = this.closest('article').id;
   storeUpdate(ideaID, 'title', title);
-  getAndClearAndDisplayIdeas();
+  refreshIdeaListFromStorage();
 });
 
 $('.idea-list').on('blur', '.idea-body', function(){
   var body = $(this).text();
   var ideaID = this.closest('article').id;
   storeUpdate(ideaID, 'body', body);
-  getAndClearAndDisplayIdeas();
+  refreshIdeaListFromStorage();
 });
 
 $('.idea-list').on('keypress', '.idea-title', function(e){
@@ -125,7 +127,7 @@ $('.idea-list').on('keypress', '.idea-title', function(e){
   var ideaID = this.closest('article').id;
   if(e.which === 13) {
     storeUpdate(ideaID, 'title', title);
-    getAndClearAndDisplayIdeas();
+    refreshIdeaListFromStorage();
 }
 });
 
@@ -134,7 +136,7 @@ $('.idea-list').on('keypress', '.idea-body', function(e){
   var ideaID = this.closest('article').id;
   if(e.which === 13) {
     storeUpdate(ideaID, 'body', body);
-    getAndClearAndDisplayIdeas();
+    refreshIdeaListFromStorage();
 }
 });
 
@@ -154,7 +156,7 @@ function storeUpdate(id, attribute, newValue) {
   }
 }
 
-function getAndClearAndDisplayIdeas() {
+function refreshIdeaListFromStorage() {
   $('.idea-box').remove();
   for (var i = 0; i < localStorage.length; i++) {
     var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -162,7 +164,7 @@ function getAndClearAndDisplayIdeas() {
 }
 }
 
-$(ideaFields).on('input', function(){
+$('#title-input, #body-input').on('input', function(){
   if($('#title-input').val() && $('#body-input').val()){
     $('#save-button').prop('disabled', false);
   } else {
@@ -170,15 +172,16 @@ $(ideaFields).on('input', function(){
   }
 });
 
-ideaFields.keypress(function(event) {
+$('#title-input, #body-input').keypress(function(event) {
+  let titleField = $('#title-input');
+  let bodyField = $('#body-input');
   if(event.which === 13) {
     event.preventDefault();
   }
    if (event.which === 13 && titleField.val() && bodyField.val()) {
-     addNewIdeaBox();
+     postAndStoreIdea();
      clearInputFields();
      disableSaveButton();
-     storeNewObject();
    }
  });
 
