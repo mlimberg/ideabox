@@ -1,4 +1,6 @@
 
+var ideaQuality = ['swill', 'plausible', 'genius']
+
 getAndDisplayIdeas();
 setEventListeners();
 
@@ -12,8 +14,8 @@ function getAndDisplayIdeas() {
 function setEventListeners() {
   $('#save-button').on('click', () => {
     postSaveAndDisplayIdea();
-  });
 
+  });
 }
 
 function postSaveAndDisplayIdea() {
@@ -26,7 +28,7 @@ function postSaveAndDisplayIdea() {
 function NewIdeaConstructor(titleText, bodyText, quality, uniqueid){
   this.titleText = titleText;
   this.bodyText = bodyText;
-  this.quality =  quality || "swill";
+  this.quality =  quality || ideaQuality[0];
   this.uniqueid = uniqueid || Date.now();
 }
 
@@ -82,11 +84,11 @@ $('.idea-list').on('click', '.upvote', function(){
   var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
   var quality;
   var ideaID = this.closest('article').id;
-  if (qualityStatus.text() == 'swill'){
-    quality = 'plausible';
-  } else if (qualityStatus.text() === 'plausible'){
-    quality = 'genius';
-  }else if (qualityStatus.text() === 'genius'){
+  if (qualityStatus.text() == ideaQuality[0]){
+    quality = ideaQuality[1];
+  } else if (qualityStatus.text() === ideaQuality[1]){
+    quality = ideaQuality[2];
+  }else if (qualityStatus.text() === ideaQuality[2]){
     return false;
   }
   storeUpdate(ideaID, 'quality', quality);
