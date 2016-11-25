@@ -14,8 +14,21 @@ function getAndDisplayIdeas() {
 function setEventListeners() {
   $('#save-button').on('click', () => {
     postSaveAndDisplayIdea();
-
   });
+  $('.idea-list').on('click', '.delete-idea', function() {
+    let idea = this.closest('article');
+    let ideaId = this.closest('article').id;
+    removeFromList(idea);
+    removeFromStorage(ideaId);
+  });
+}
+
+function removeFromList(input) {
+  input.remove();
+}
+
+function removeFromStorage(input) {
+  localStorage.removeItem(input)
 }
 
 function postSaveAndDisplayIdea() {
@@ -74,11 +87,7 @@ var storeNewObject = currentIdea => {
   localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
-$('.idea-list').on('click', '.delete-idea', function(){
-  var ideaId = this.closest('article').id;
-  $(this).closest('article').remove();
-  localStorage.removeItem(ideaId);
-});
+
 
 $('.idea-list').on('click', '.upvote', function(){
   var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
