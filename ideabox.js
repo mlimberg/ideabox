@@ -56,21 +56,21 @@ function prependIdeas(currentIdea) {
         <div class="idea-ranking-quality">quality:</div>
         <div class="idea-ranking">${currentIdea.quality}</div>
       </div>
-    </article>`);
+    </article>`
+  );
 }
 
-function clearInputFields() {
+var clearInputFields = () => {
   let titleField = $('#title-input');
   let bodyField = $('#body-input');
   return titleField.val("") && bodyField.val("") && $('#search-input').val("");
-
 }
 
-function disableSaveButton() {
+var disableSaveButton = () => {
   $('#save-button').prop('disabled', true);
 }
 
-function storeNewObject(currentIdea){
+var storeNewObject = currentIdea => {
   localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
@@ -99,11 +99,11 @@ $('.idea-list').on('click', '.downvote', function(event){
   var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
   var quality;
   var ideaID = this.closest('article').id;
-  if (qualityStatus.text() == 'genius'){
-    quality = 'plausible';
-  } else if (qualityStatus.text() === 'plausible'){
-    quality = 'swill';
-  } else if (qualityStatus.text() === 'swill'){
+  if (qualityStatus.text() == ideaQuality[2]){
+    quality = ideaQuality[1];
+  } else if (qualityStatus.text() === ideaQuality[1]){
+    quality = ideaQuality[0];
+  } else if (qualityStatus.text() === ideaQuality[0]){
     return false;
   }
   storeUpdate(ideaID, 'quality', quality);
@@ -142,9 +142,9 @@ $('.idea-list').on('keypress', '.idea-body', function(e){
 }
 });
 
-function storeUpdate(id, attribute, newValue) {
-  for (var i = 0; i < localStorage.length; i++) {
-    var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
+var storeUpdate = (id, attribute, newValue) => {
+  for (let i = 0; i < localStorage.length; i++) {
+    let idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (id == idea.uniqueid) {
       if (attribute === 'quality') {
         idea.quality = newValue;
@@ -158,12 +158,12 @@ function storeUpdate(id, attribute, newValue) {
   }
 }
 
-function refreshIdeaListFromStorage() {
+var refreshIdeaListFromStorage = () => {
   $('.idea-box').remove();
-  for (var i = 0; i < localStorage.length; i++) {
-    var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
+  for (let i = 0; i < localStorage.length; i++) {
+    let idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
     prependIdeas(idea);
-}
+  }
 }
 
 $('#title-input, #body-input').on('input', function(){
