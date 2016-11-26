@@ -1,0 +1,215 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html, body {
+  font-family: 'Open-Sans', sans-serif; }
+
+h1 {
+  font-weight: 700;
+  font-family: "Roboto Slab", serif;
+  width: 95px; }
+
+#box-text {
+  color: #6d6e71; }
+
+.main-h1 {
+  text-align: center;
+  width: 200px;
+  height: 30px;
+  margin: auto;
+  padding: 20px 0 40px 0; }
+
+::-webkit-input-placeholder {
+  font-size: 20px;
+  padding-left: 5px; }
+
+.input-section {
+  width: 100%;
+  height: 310px;
+  background-color: #e5f3f2;
+  padding-bottom: 20px; }
+  .input-section h1 {
+    color: #00a79d;
+    font-size: 50px;
+    display: inline-block; }
+
+.input-section input, .input-section button, .input-section textarea, .idea-section input {
+  display: block;
+  width: 90%;
+  margin: auto;
+  border: 1px solid #939958; }
+
+.input-section input, .input-section textarea, .idea-section input {
+  font-size: 20px;
+  padding-left: 5px; }
+
+input:focus, textarea:focus, button:focus, .idea-title:focus, .idea-body:focus {
+  box-shadow: none;
+  outline: 0; }
+
+textarea {
+  resize: none; }
+
+#title-input, #save-button, #search-input {
+  height: 40px;
+  margin-bottom: 20px; }
+
+#body-input {
+  height: 90px;
+  margin-bottom: 20px; }
+
+#search-input {
+  margin-top: 20px; }
+
+#save-button {
+  font-size: 20px;
+  color: white;
+  background-color: #00a79d;
+  width: 91%;
+  border: none; }
+  #save-button:hover {
+    background-color: #045e55;
+    cursor: pointer; }
+  #save-button:disabled {
+    background-color: #D3D3D3;
+    cursor: default; }
+
+.delete-idea {
+  display: inline-block;
+  float: right;
+  background-image: url("../Images/delete.svg");
+  height: 40px;
+  width: 40px;
+  vertical-align: bottom; }
+  .delete-idea:hover {
+    background-image: url("../Images/delete-hover.svg");
+    background-position: inherit;
+    cursor: pointer; }
+
+.downvote {
+  background: url("../Images/downvote.svg"); }
+  .downvote:hover {
+    background: url("../Images/downvote-hover.svg");
+    cursor: pointer; }
+
+.upvote {
+  background: url("../Images/upvote.svg"); }
+  .upvote:hover {
+    background: url("../Images/upvote-hover.svg");
+    cursor: pointer; }
+
+.upvote, .downvote {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: bottom; }
+
+@media screen and (min-width: 900px) {
+  .input-section input, .input-section button, .input-section textarea, .idea-section input {
+    width: 814px; }
+
+  #save-button {
+    width: 820px; }
+
+  .idea-box {
+    width: 820px; }
+
+  .hidden {
+    display: none;
+    border-bottom: 1px #ffffff solid;
+    width: 0%;
+    margin: none;
+    padding-bottom: 0px; } }
+.idea-box {
+  width: 90%;
+  margin: 30px auto;
+  display: block;
+  border-bottom: 1px solid #D1D3D4;
+  padding-bottom: 20px; }
+
+.idea-box-header {
+  width: 100%;
+  text-align: left;
+  overflow: scroll; }
+
+.idea-title {
+  color: #6D6E71;
+  display: inline-block;
+  font-size: 40px;
+  overflow: visible;
+  width: 85%;
+  margin-bottom: 15px; }
+
+.idea-body {
+  color: #939598;
+  margin: 30px auto;
+  font-size: 20px;
+  font-weight: lighter; }
+
+.idea-box-footer {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding-top: 10px; }
+
+.idea-ranking-quality {
+  display: inline-block;
+  font-size: 20px;
+  height: 30px;
+  text-align: right;
+  margin-right: 1px;
+  vertical-align: center; }
+
+.idea-ranking {
+  display: inline-block;
+  font-size: 20px;
+  height: 30px;
+  text-align: left;
+  color: #D1D3D4; }
+
+/*# sourceMappingURL=main.css.map */

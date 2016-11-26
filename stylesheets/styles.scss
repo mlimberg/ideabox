@@ -1,0 +1,33 @@
+$main-font: 'Roboto Slab', serif;
+$header-background-color: #e5f3f2;
+$h1-idea-color: #00a79d;
+$h1-box-color: #6d6e71;
+
+html, body{
+  font-family: 'Open-Sans', sans-serif;
+}
+
+h1{
+  font: {
+    weight: 700;
+    family: $main-font;
+  }
+  width: 95px;
+}
+
+#box-text{
+  color: $h1-box-color;
+}
+
+.main-h1{
+  text-align: center;
+  width: 200px;
+  height: 30px;
+  margin: auto;
+  padding: 20px 0 40px 0;
+}
+
+::-webkit-input-placeholder{
+  font-size: 20px;
+  padding-left: 5px;
+}

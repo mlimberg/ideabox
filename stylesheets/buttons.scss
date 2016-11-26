@@ -1,0 +1,64 @@
+$save-main-background: #00a79d;
+$save-hover-background: #045e55;
+$save-disabled-background: #D3D3D3;
+$upvote-img: url('../Images/upvote.svg');
+$upvote-hover-img: url('../Images/upvote-hover.svg');
+$downvote-img: url('../Images/downvote.svg');
+$downvote-hover-img: url('../Images/downvote-hover.svg');
+$delete-idea-img: url('../Images/delete.svg');
+$delete-idea-hover-img: url('../Images/delete-hover.svg');
+
+#save-button{
+  font-size: 20px;
+  color: white;
+  background-color: $save-main-background;
+  width: 91%;
+  border: none;
+  &:hover{
+    background-color: $save-hover-background;
+    cursor: pointer;
+  }
+
+  &:disabled{
+    background-color: $save-disabled-background;
+    cursor: default;
+  }
+}
+
+.delete-idea {
+  display: inline-block;
+  float: right;
+  background-image: $delete-idea-img;
+  height: 40px;
+  width: 40px;
+  vertical-align: bottom;
+  &:hover {
+    background-image: $delete-idea-hover-img;
+    background-position: inherit;
+    cursor: pointer;
+  }
+}
+
+.downvote {
+  background: $downvote-img;
+  &:hover{
+    background: $downvote-hover-img;
+    cursor: pointer;
+  }
+}
+
+.upvote {
+  background: $upvote-img;
+  &:hover {
+    background: $upvote-hover-img;
+    cursor: pointer;
+  }
+}
+
+.upvote, .downvote {
+  height: 40px;
+  width: 40px;
+  margin-right: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+}

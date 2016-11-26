@@ -1,0 +1,64 @@
+$idea-ranking-color: #D1D3D4;
+$idea-title-color: #6D6E71;
+$idea-body-color: #939598;
+
+@mixin title-to-change {
+
+}
+
+@mixin idea-ranking($text-align) {
+display: inline-block;
+font-size: 20px;
+height: 30px;
+text-align: $text-align;
+}
+
+.idea-box {
+  width: 90%;
+  margin: 30px auto;
+  display: block;
+  border-bottom: 1px solid #D1D3D4;
+  padding-bottom: 20px
+}
+
+.idea-box-header {
+  width: 100%;
+  text-align: left;
+  overflow: scroll;
+}
+
+.idea-title {
+  color: $idea-title-color;
+  display: inline-block;
+  font-size: 40px;
+  overflow: visible;
+  width: 85%;
+  margin-bottom: 15px;
+}
+
+.idea-body {
+  color: $idea-body-color;
+  margin: 30px auto;
+  font: {
+    size: 20px;
+    weight: lighter;
+  }
+}
+
+.idea-box-footer {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.idea-ranking-quality {
+  @include idea-ranking(right);
+  margin-right: 1px;
+  vertical-align: center;
+}
+
+.idea-ranking {
+  @include idea-ranking(left);
+  color: $idea-ranking-color;
+}
