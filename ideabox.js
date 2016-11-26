@@ -1,5 +1,4 @@
-
-var ideaQuality = ['swill', 'plausible', 'genius']
+const ideaQuality = ['swill', 'plausible', 'genius']
 
 getAndDisplayIdeas();
 setEventListeners();
@@ -9,18 +8,6 @@ function getAndDisplayIdeas() {
     var idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
     prependIdeas(idea);
   }
-}
-
-function setEventListeners() {
-  $('#save-button').on('click', () => {
-    postSaveAndDisplayIdea();
-  });
-  $('.idea-list').on('click', '.delete-idea', function() {
-    let idea = this.closest('article');
-    let ideaId = this.closest('article').id;
-    removeFromList(idea);
-    removeFromStorage(ideaId);
-  });
 }
 
 function removeFromList(input) {
@@ -73,85 +60,43 @@ function prependIdeas(currentIdea) {
   );
 }
 
-var clearInputFields = () => {
+clearInputFields = () => {
   let titleField = $('#title-input');
   let bodyField = $('#body-input');
   return titleField.val("") && bodyField.val("") && $('#search-input').val("");
 }
 
-var disableSaveButton = () => {
+disableSaveButton = () => {
   $('#save-button').prop('disabled', true);
 }
 
-var storeNewObject = currentIdea => {
+storeNewObject = currentIdea => {
   localStorage.setItem(currentIdea.uniqueid, JSON.stringify(currentIdea));
 }
 
-
-
-$('.idea-list').on('click', '.upvote', function(){
-  var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
-  var quality;
-  var ideaID = this.closest('article').id;
-  if (qualityStatus.text() == ideaQuality[0]){
-    quality = ideaQuality[1];
-  } else if (qualityStatus.text() === ideaQuality[1]){
-    quality = ideaQuality[2];
-  }else if (qualityStatus.text() === ideaQuality[2]){
-    return false;
+function changeQualityUp(input, ideaId) {
+  if (input === ideaQuality[0]){
+    input = ideaQuality[1];
+  } else if (input === ideaQuality[1]){
+    input = ideaQuality[2];
+  }else if (input === ideaQuality[2]){
+    input = input;
   }
-  storeUpdate(ideaID, 'quality', quality);
-  refreshIdeaListFromStorage();
-});
+  return input
+}
 
-$('.idea-list').on('click', '.downvote', function(event){
-  var qualityStatus = $(this).closest('.idea-box').find('.idea-ranking');
-  var quality;
-  var ideaID = this.closest('article').id;
-  if (qualityStatus.text() == ideaQuality[2]){
-    quality = ideaQuality[1];
-  } else if (qualityStatus.text() === ideaQuality[1]){
-    quality = ideaQuality[0];
-  } else if (qualityStatus.text() === ideaQuality[0]){
-    return false;
+function changeQualityDown(input, ideaId) {
+  if(input === ideaQuality[2]){
+    input = ideaQuality[1];
+  } else if (input === ideaQuality[1]){
+    input = ideaQuality[0];
+  } else if (input === ideaQuality[0]){
+    input = input;
   }
-  storeUpdate(ideaID, 'quality', quality);
-  refreshIdeaListFromStorage();
-});
-
-$('.idea-list').on('blur', '.idea-title', function(){
-  var title = $(this).text();
-  var ideaID = this.closest('article').id;
-  storeUpdate(ideaID, 'title', title);
-  refreshIdeaListFromStorage();
-});
-
-$('.idea-list').on('blur', '.idea-body', function(){
-  var body = $(this).text();
-  var ideaID = this.closest('article').id;
-  storeUpdate(ideaID, 'body', body);
-  refreshIdeaListFromStorage();
-});
-
-$('.idea-list').on('keypress', '.idea-title', function(e){
-  var title = $(this).text();
-  var ideaID = this.closest('article').id;
-  if(e.which === 13) {
-    storeUpdate(ideaID, 'title', title);
-    refreshIdeaListFromStorage();
+  return input;
 }
-});
 
-$('.idea-list').on('keypress', '.idea-body', function(e){
-  var body = $(this).text();
-  var ideaID = this.closest('article').id;
-  if(e.which === 13) {
-    storeUpdate(ideaID, 'body', body);
-    refreshIdeaListFromStorage();
-}
-});
-
-var storeUpdate = (id, attribute, newValue) => {
+storeUpdate = (id, attribute, newValue) => {
   for (let i = 0; i < localStorage.length; i++) {
     let idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (id == idea.uniqueid) {
@@ -165,9 +110,10 @@ var storeUpdate = (id, attribute, newValue) => {
       localStorage.setItem(parseInt(id), JSON.stringify(idea));
     }
   }
+  refreshIdeaListFromStorage();
 }
 
-var refreshIdeaListFromStorage = () => {
+refreshIdeaListFromStorage = () => {
   $('.idea-box').remove();
   for (let i = 0; i < localStorage.length; i++) {
     let idea = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -175,34 +121,89 @@ var refreshIdeaListFromStorage = () => {
   }
 }
 
-$('#title-input, #body-input').on('input', function(){
-  if($('#title-input').val() && $('#body-input').val()){
-    $('#save-button').prop('disabled', false);
-  } else {
-    $('#save-button').prop('disabled', true);
-  }
-});
+function setEventListeners() {
+  $('#save-button').on('click', () => {
+    postSaveAndDisplayIdea();
+  });
 
-$('#title-input, #body-input').keypress(function(event) {
-  let titleField = $('#title-input');
-  let bodyField = $('#body-input');
-  if(event.which === 13) {
-    event.preventDefault();
-  }
-   if (event.which === 13 && titleField.val() && bodyField.val()) {
-     postAndStoreIdea();
-     clearInputFields();
-     disableSaveButton();
-   }
- });
+  $('.idea-list').on('click', '.delete-idea', function() {
+    let idea = this.closest('article');
+    let ideaId = this.closest('article').id;
+    removeFromList(idea);
+    removeFromStorage(ideaId);
+  });
 
- $("#search-input").keyup(function(){
-   var filter = $(this).val();
-   $(".search-field").each(function() {
-     if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-       $(this).parent().addClass('hidden');
-     } else {
-       $(this).parent().removeClass('hidden');
-     }
-   });
- });
+  $('.idea-list').on('click', '.upvote', function(){
+    let qualityStatus = $(this).closest('.idea-box').find('.idea-ranking').text();
+    let ideaId = this.closest('article').id;
+    qualityStatus = changeQualityUp(qualityStatus, ideaId)
+    storeUpdate(ideaId, 'quality', qualityStatus);
+  });
+
+  $('.idea-list').on('click', '.downvote', function(){
+    let qualityStatus = $(this).closest('.idea-box').find('.idea-ranking').text();
+    let ideaId = this.closest('article').id;
+    qualityStatus = changeQualityDown(qualityStatus, ideaId)
+    storeUpdate(ideaId, 'quality', qualityStatus)
+  });
+
+  $('.idea-list').on('blur', '.idea-title', function(){
+    let title = $(this).text();
+    let ideaID = this.closest('article').id;
+    storeUpdate(ideaID, 'title', title);
+  });
+
+  $('.idea-list').on('blur', '.idea-body', function(){
+    let body = $(this).text();
+    let ideaID = this.closest('article').id;
+    storeUpdate(ideaID, 'body', body);
+  });
+
+  $('.idea-list').on('keypress', '.idea-title', function(e){
+    let title = $(this).text();
+    let ideaID = this.closest('article').id;
+    if(e.which === 13) {
+      storeUpdate(ideaID, 'title', title);
+    }
+  });
+
+  $('.idea-list').on('keypress', '.idea-body', function(e){
+    let body = $(this).text();
+    let ideaID = this.closest('article').id;
+    if(e.which === 13) {
+      storeUpdate(ideaID, 'body', body);
+    }
+  });
+
+  $('#title-input, #body-input').on('input', function(){
+    if($('#title-input').val() && $('#body-input').val()){
+      $('#save-button').prop('disabled', false);
+    } else {
+      $('#save-button').prop('disabled', true);
+    }
+  });
+
+  $('#title-input, #body-input').keypress(function(event) {
+    let titleField = $('#title-input');
+    let bodyField = $('#body-input');
+    if(event.which === 13) {
+      event.preventDefault();
+    }
+    if (event.which === 13 && titleField.val() && bodyField.val()) {
+      postAndStoreIdea();
+      clearInputFields();
+      disableSaveButton();
+    }
+  });
+
+  $("#search-input").keyup(function(){
+    let filter = $(this).val();
+    $(".search-field").each(function() {
+      if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+        $(this).parent().addClass('hidden');
+      } else {
+        $(this).parent().removeClass('hidden');
+      }
+    });
+  });
+}
